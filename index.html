@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Administrativo - Colegio</title>
+  <title>Dashboard Colegio con Gráficos</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     body {
@@ -25,139 +26,127 @@
     .nav-link i {
       margin-right: 8px;
     }
+    canvas {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 10px;
+    }
   </style>
 </head>
 <body>
-  <!-- Top Navbar -->
+  <!-- Navbar -->
   <nav class="navbar navbar-dark bg-primary px-4">
     <span class="navbar-brand mb-0 h1">Colegio Admin</span>
   </nav>
 
   <div class="container-fluid">
     <div class="row">
-      <!-- Sidebar estilo Metronic -->
+      <!-- Sidebar -->
       <nav class="col-md-2 bg-dark text-white sidebar py-4">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-white" data-bs-toggle="collapse" href="#admisionesSubmenu">
-              <i class="bi bi-person-plus"></i> Admisiones
-            </a>
-            <div class="collapse" id="admisionesSubmenu">
-              <ul class="nav flex-column ms-3">
-                <li class="nav-item"><a class="nav-link text-white" href="#">Solicitudes</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Entrevistas</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link text-white" data-bs-toggle="collapse" href="#matriculasSubmenu">
-              <i class="bi bi-person-check"></i> Matrículas
-            </a>
-            <div class="collapse" id="matriculasSubmenu">
-              <ul class="nav flex-column ms-3">
-                <li class="nav-item"><a class="nav-link text-white" href="#">Registro</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Cursos Asignados</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link text-white" data-bs-toggle="collapse" href="#academicoSubmenu">
-              <i class="bi bi-journal-text"></i> Académico
-            </a>
-            <div class="collapse" id="academicoSubmenu">
-              <ul class="nav flex-column ms-3">
-                <li class="nav-item"><a class="nav-link text-white" href="#">Notas</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Asistencia</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Evaluaciones</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link text-white" data-bs-toggle="collapse" href="#financieroSubmenu">
-              <i class="bi bi-cash-stack"></i> Financiero
-            </a>
-            <div class="collapse" id="financieroSubmenu">
-              <ul class="nav flex-column ms-3">
-                <li class="nav-item"><a class="nav-link text-white" href="#">Pagos</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Facturación</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Cartera</a></li>
-              </ul>
-            </div>
-          </li>
-
+          <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-house-door"></i> Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-person-plus"></i> Admisiones</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-journal-text"></i> Académico</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-cash-stack"></i> Financiero</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-gear"></i> Configuración</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#"><i class="bi bi-box-arrow-right"></i> Salir</a></li>
         </ul>
       </nav>
 
       <!-- Main Content -->
       <main class="col-md-10 ms-sm-auto px-4 py-4">
-        <h1 class="mb-4">Panel de Administración</h1>
+        <h1 class="mb-4">Panel de Estadísticas</h1>
 
         <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="card bg-success text-white shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Total Estudiantes</h5>
-                <p class="card-text display-6">850</p>
-              </div>
-            </div>
+          <div class="col-md-6 mb-4">
+            <h5>Distribución de Estudiantes por Nivel</h5>
+            <canvas id="nivelChart"></canvas>
           </div>
-          <div class="col-md-4 mb-3">
-            <div class="card bg-info text-white shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Docentes Activos</h5>
-                <p class="card-text display-6">65</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card bg-warning text-white shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Cursos Asignados</h5>
-                <p class="card-text display-6">120</p>
-              </div>
-            </div>
+          <div class="col-md-6 mb-4">
+            <h5>Porcentaje de Asistencia</h5>
+            <canvas id="asistenciaChart"></canvas>
           </div>
         </div>
 
-        <h3 class="mt-5">Últimos reportes</h3>
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Tipo</th>
-              <th>Fecha</th>
-              <th>Generado por</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Asistencia</td>
-              <td>10/07/2025</td>
-              <td>Coordinación</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Calificaciones</td>
-              <td>09/07/2025</td>
-              <td>Dirección Académica</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Eventos</td>
-              <td>08/07/2025</td>
-              <td>Rectoría</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-md-12 mb-4">
+            <h5>Evolución de Matrículas (Últimos 6 años)</h5>
+            <canvas id="matriculaChart"></canvas>
+          </div>
+        </div>
       </main>
     </div>
   </div>
+
+  <!-- Chart.js Scripts -->
+  <script>
+    // Distribución por nivel
+    new Chart(document.getElementById("nivelChart"), {
+      type: "bar",
+      data: {
+        labels: ["Preescolar", "Primaria", "Secundaria", "Media"],
+        datasets: [{
+          label: "Estudiantes",
+          data: [120, 300, 250, 180],
+          backgroundColor: ["#0d6efd", "#198754", "#ffc107", "#dc3545"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Distribución por Nivel Educativo"
+          }
+        }
+      }
+    });
+
+    // Porcentaje de asistencia
+    new Chart(document.getElementById("asistenciaChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["Asistieron", "Ausentes"],
+        datasets: [{
+          data: [92, 8],
+          backgroundColor: ["#198754", "#dc3545"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Asistencia General (%)"
+          }
+        }
+      }
+    });
+
+    // Evolución de matrículas
+    new Chart(document.getElementById("matriculaChart"), {
+      type: "line",
+      data: {
+        labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
+        datasets: [{
+          label: "Estudiantes Matriculados",
+          data: [700, 750, 800, 820, 850, 870],
+          borderColor: "#0d6efd",
+          backgroundColor: "rgba(13,110,253,0.2)",
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Crecimiento de Matrículas"
+          }
+        }
+      }
+    });
+  </script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
