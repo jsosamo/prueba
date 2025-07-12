@@ -1,1 +1,102 @@
-Hola mundo
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Colegio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Colegio Admin</a>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-2 bg-light sidebar py-4">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Estudiantes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Docentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Horarios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main content -->
+      <main class="col-md-10 ms-sm-auto px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
+          <h1 class="h2">Panel de Administración</h1>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success">
+              <div class="card-body">
+                <h5 class="card-title">Total Estudiantes</h5>
+                <p class="card-text display-6">850</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card text-white bg-info">
+              <div class="card-body">
+                <h5 class="card-title">Docentes Activos</h5>
+                <p class="card-text display-6">65</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning">
+              <div class="card-body">
+                <h5 class="card-title">Cursos Asignados</h5>
+                <p class="card-text display-6">120</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="mt-4">Últimos reportes</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Generado por</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Asistencia</td>
+              <td>10/07/2025</td>
+              <td>Coordinación</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Calificaciones</td>
+              <td>09/07/2025</td>
+              <td>Dirección Académica</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Eventos</td>
+              <td>08/07/2025</td>
+              <td>Rectoría</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        alert("Bienvenido al panel de administración del colegio");
+    </script>
+</body>
+</html>
